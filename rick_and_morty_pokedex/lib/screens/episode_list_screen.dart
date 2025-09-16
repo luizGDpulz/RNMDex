@@ -45,35 +45,48 @@ class _EpisodeListScreenState extends State<EpisodeListScreen> {
         title: Text('Lista de Episódios', style: TextStyle(color: Colors.greenAccent)),
         iconTheme: IconThemeData(color: Colors.greenAccent),
       ),
-      body: _loading
-          ? Center(child: CircularProgressIndicator(color: Colors.greenAccent))
-          : _error.isNotEmpty
-              ? Center(child: Text(_error, style: TextStyle(color: Colors.redAccent)))
-              : ListView.builder(
-                  itemCount: _episodes.length,
-                  itemBuilder: (context, i) {
-                    final ep = _episodes[i];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                      child: Card(
-                        color: Colors.deepPurple[900],
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Center(child: Text(ep.name, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18))),
-                              SizedBox(height: 8),
-                              Center(child: Text('Episódio: ${ep.episode}', style: TextStyle(color: Colors.deepPurpleAccent))),
-                              Center(child: Text('Data: ${ep.airDate}', style: TextStyle(color: Colors.greenAccent))),
-                            ],
-                          ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final isWeb = constraints.maxWidth > 600;
+          final maxContentWidth = 600.0;
+          if (_loading) {
+            return Center(child: CircularProgressIndicator(color: Colors.greenAccent));
+          }
+          if (_error.isNotEmpty) {
+            return Center(child: Text(_error, style: TextStyle(color: Colors.redAccent)));
+          }
+          return Center(
+            child: Container(
+              width: isWeb ? maxContentWidth : double.infinity,
+              child: ListView.builder(
+                itemCount: _episodes.length,
+                itemBuilder: (context, i) {
+                  final ep = _episodes[i];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    child: Card(
+                      color: Colors.deepPurple[900],
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Center(child: Text(ep.name, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18))),
+                            SizedBox(height: 8),
+                            Center(child: Text('Episódio: ${ep.episode}', style: TextStyle(color: Colors.deepPurpleAccent))),
+                            Center(child: Text('Data: ${ep.airDate}', style: TextStyle(color: Colors.greenAccent))),
+                          ],
                         ),
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

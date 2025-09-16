@@ -6,8 +6,9 @@ import 'entity_badge.dart';
 class CharacterCard extends StatelessWidget {
 	final Character character;
 	final VoidCallback? onTap;
+	final double imageSize;
 
-	const CharacterCard({Key? key, required this.character, this.onTap}) : super(key: key);
+	const CharacterCard({Key? key, required this.character, this.onTap, this.imageSize = 300}) : super(key: key);
 
 	Color _statusColor(String status) {
 		switch (status.toLowerCase()) {
@@ -33,24 +34,24 @@ class CharacterCard extends StatelessWidget {
 					children: [
 						Hero(
 							tag: 'character-image-${character.id}',
-							child: ClipRRect(
-								borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+											child: ClipRRect(
+												borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
 												child: character.image.isNotEmpty
 														? Image.network(
 																character.image,
-																height: 140,
+																height: imageSize,
 																fit: BoxFit.cover,
 																errorBuilder: (context, error, stackTrace) => Container(
-																	height: 140,
+																	height: imageSize,
 																	color: Colors.grey[900],
 																	child: Icon(Icons.error, color: Colors.redAccent),
 																),
 																loadingBuilder: (context, child, progress) => progress == null
 																		? child
-																		: Container(height: 140, color: Colors.grey[900]),
+																		: Container(height: imageSize, color: Colors.grey[900]),
 															)
 														: Container(
-																height: 140,
+																height: imageSize,
 																color: Colors.grey[900],
 																child: Icon(Icons.person, color: Colors.greenAccent),
 															),

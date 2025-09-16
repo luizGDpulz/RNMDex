@@ -14,32 +14,33 @@ class RickAndMortyPokedexApp extends StatelessWidget {
 	Widget build(BuildContext context) {
 		return ChangeNotifierProvider(
 			create: (_) => SearchProvider(),
-			child: MaterialApp(
-				title: 'Pokedex Temática',
-				theme: ThemeData.dark().copyWith(
-					primaryColor: Colors.deepPurple,
-					scaffoldBackgroundColor: Colors.black,
-					colorScheme: ColorScheme.dark(
-						primary: Colors.deepPurple,
-						secondary: Colors.greenAccent,
-					),
-				),
-				initialRoute: '/',
+					child: MaterialApp(
+						title: 'RnM Dex',
+						debugShowCheckedModeBanner: false,
+						theme: ThemeData.dark().copyWith(
+							primaryColor: Colors.deepPurple,
+							scaffoldBackgroundColor: Colors.black,
+							colorScheme: ColorScheme.dark(
+								primary: Colors.deepPurple,
+								secondary: Colors.greenAccent,
+							),
+						),
+						initialRoute: '/',
 						routes: {
 							'/': (context) => const HomeScreen(),
 							'/search': (context) => const SearchScreen(),
 							'/episodes': (context) => const EpisodeListScreen(),
 						},
-				onGenerateRoute: (settings) {
-					if (settings.name == '/detail') {
-						final character = settings.arguments as Character;
-						return MaterialPageRoute(
-							builder: (_) => DetailScreen(character: character),
-						);
-					}
-					return null;
-				},
-			),
+						onGenerateRoute: (settings) {
+							if (settings.name == '/detail') {
+								final character = settings.arguments as Character;
+								return MaterialPageRoute(
+									builder: (_) => DetailScreen(character: character),
+								);
+							}
+							return null;
+						},
+					),
 		);
 	}
 }
