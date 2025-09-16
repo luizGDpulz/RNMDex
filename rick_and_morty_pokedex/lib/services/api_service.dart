@@ -67,4 +67,23 @@ class ApiService {
 			throw Exception('Failed to load episode');
 		}
 	}
+	/// Fetches all episodes (paginated).
+	Future<List<Episode>> fetchAllEpisodes() async {
+		List<Episode> episodes = [];
+		int page = 1;
+		bool hasNext = true;
+		while (hasNext) {
+			final url = Uri.parse('$baseUrl/episode/?page=$page');
+			final response = await client.get(url);
+			if (response.statusCode == 200) {
+				final data = json.decode(response.body);
+				episodes.addAll((data['results'] as List).map((json) => Episode.fromJson(json)));
+				hasNext = data['info']['next'] != null;
+				page++;
+			} else {
+				hasNext = false;
+			}
+		}
+		return episodes;
+	}
 }

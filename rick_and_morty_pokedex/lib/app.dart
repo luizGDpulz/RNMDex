@@ -4,6 +4,7 @@ import 'providers/search_provider.dart';
 import 'screens/home_screen.dart';
 import 'screens/search_screen.dart';
 import 'screens/detail_screen.dart';
+import 'screens/episode_list_screen.dart'; // Importing EpisodeListScreen for routing
 import 'models/character.dart';
 
 class RickAndMortyPokedexApp extends StatelessWidget {
@@ -24,10 +25,11 @@ class RickAndMortyPokedexApp extends StatelessWidget {
 					),
 				),
 				initialRoute: '/',
-				routes: {
-					'/': (context) => const HomeScreen(),
-					'/search': (context) => const SearchScreen(),
-				},
+						routes: {
+							'/': (context) => const HomeScreen(),
+							'/search': (context) => const SearchScreen(),
+							'/episodes': (context) => const EpisodeListScreen(),
+						},
 				onGenerateRoute: (settings) {
 					if (settings.name == '/detail') {
 						final character = settings.arguments as Character;
