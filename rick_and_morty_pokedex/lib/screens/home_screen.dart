@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
 						mainAxisAlignment: MainAxisAlignment.center,
 						children: [
 							Text(
-								'Pokedex Temática',
+								'Rick and Morty Dex',
 								style: TextStyle(
 									color: Colors.greenAccent,
 									fontSize: 36,
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
 							),
 							SizedBox(height: 24),
 							Text(
-								'Explore personagens do universo Rick and Morty!\nUse a busca inteligente para encontrar qualquer personagem, local ou episódio.',
+								'Explore personagens do universo Rick and Morty!\nUse a busca inteligente para encontrar qualquer personagem!',
 								style: TextStyle(
 									color: Colors.white,
 									fontSize: 18,

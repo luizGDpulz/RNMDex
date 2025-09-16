@@ -70,10 +70,10 @@ class _DetailScreenState extends State<DetailScreen> {
 														offset: Offset(0, 6),
 													),
 												],
-												borderRadius: BorderRadius.circular(24),
+												borderRadius: BorderRadius.circular(18),
 											),
 											child: ClipRRect(
-												borderRadius: BorderRadius.circular(24),
+												borderRadius: BorderRadius.circular(13),
 												child: AspectRatio(
 													aspectRatio: 1,
 													child: Image.network(
